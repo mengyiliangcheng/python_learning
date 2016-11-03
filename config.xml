@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config>
+    <!-- save log path -->
+    <logpath>$HOME</logpath>
+
+    <!-- max log file size ,MB -->
+    <logsize>3</logsize>
+
+    <!-- log file number -->
+    <lognum>3</lognum>
+</config>
