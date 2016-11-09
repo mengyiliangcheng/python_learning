@@ -16,9 +16,6 @@ class bcolors:
     ENDC = '\033[0m'        #white
     BOLD = '\033[1m'        #bold
     UNDERLINE = '\033[4m'   #underline
-if __name__ == '__main__':
-    print bcolors.HEADER + "waring character " + bcolors.ENDC
-
 def print_warning(str):
     print bcolors.WARNING + str + bcolors.ENDC    
 
@@ -34,4 +31,6 @@ def print_fail(str):
 def print_okblue(str):
     print bcolors.OKBLUE + str + bcolors.ENDC
 
+if __name__ == '__main__':
+    print bcolors.HEADER + "waring character " + bcolors.ENDC
 

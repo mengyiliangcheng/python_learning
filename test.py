@@ -6,9 +6,43 @@
 #Create Time:20161101
 #Description:
 
-import sfunction
+import sys
 
-sfunction
+while False:
+    reply = raw_input("Enter text ")
+    if reply == 'stop':
+        break
+    #check input number
+    elif not reply.isdigit():
+        print 'error input'
+    else:
+        print int(reply)**2
+#print 'bye'* 8
+
+while False:
+    reply = raw_input("Enter text : ")
+    if reply == 'stop':
+        break
+    try:
+        num = int(reply)
+    except:
+        print 'error input'    
+    else:
+        print num ** 2
+#print 'bye' * 8
+
+class FileFaker:
+    def write(self,string):
+        string = 'abcdef'        
+#sys.stdout = FileFaker()
+#print "hello"
+
+#sys.stdout = open('log.txt','a')
+log = open('log.txt','a')
+print >> log,'adjk'
+log.close()
+
+
 
 
 
