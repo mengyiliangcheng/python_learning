@@ -1,0 +1,2545 @@
+--------------------------------
+#!/usr/bin/env python 
+
+
+
+#File Name:test.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161101
+
+#Description:
+
+
+
+print "hello world"
+
+for i in range(1,5):
+
+    for j in range(1,5):
+
+        for k in range(1,5):
+
+            if( i != k ) and (i != j ) and ( j != k ):
+
+                print i,j,k
+
+
+
+
+
+--------------------------------
+#!/usr/bin/python
+
+
+
+import sys
+
+import os
+
+print("hello world!")
+
+print sys.platform
+
+#s="hello"
+
+#print len(s)
+
+#print s.find('e')
+
+#print s.replace('e','a')
+
+#print dir(s)
+
+#print help(s.index)
+
+#os.mkdir("test")
+
+#print s
+
+--------------------------------
+#!/usr/bin/env python 
+
+
+
+#File Name:ifelse.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161101
+
+#Description:
+
+
+
+score = int (raw_input('input score:\n'))
+
+if score >= 90:
+
+    grade = 'A'
+
+elif score >= 60:
+
+    grade = 'B'
+
+else:
+
+    grade = 'C'
+
+
+
+print '%d belongs to %s' % (score,grade)
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*- 
+
+
+
+#File Name:python_script.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161102
+
+#Description:
+
+
+
+from os.path import exists
+
+from time import strftime
+
+import os
+
+import sys
+
+import scolor
+
+#print "script name:" ,sys.argv[0]
+
+#for i in range(1,len(sys.argv)):
+
+#    print "parameter",i,sys.argv[i]
+
+#print len(sys.argv)
+
+
+
+title = "demo.py"
+
+
+
+#prints usage if not appropriate length of arguments are provided
+
+def usage():
+
+    scolor.print_warning("[-] Usage: ./python_script.py <filename>") 
+
+    exit(0)
+
+
+
+if len(sys.argv) < 2:
+
+    scolor.print_fail("This script is used to create the file head for a new python script" )
+
+    scolor.print_fail("You must bring a parameter as the prefix of the new script name. !" )
+
+    usage()
+
+    exit(3)
+
+
+
+#input user information
+
+elif sys.argv[1] == 'l':
+
+    title = raw_input("Enter a title for your script:")
+
+    title = title + '.py'
+
+    title = title.lower()
+
+    title = title.replace(' ','_')
+
+
+
+    if exists(title):
+
+        print "\nA script with this name is already exists"
+
+        exit(1)
+
+
+
+    descrpt = raw_input('Enter a description:')
+
+    name = raw_input('Enter your name:')
+
+    ver = raw_input('Enter the version number:')
+
+#use default information
+
+else:
+
+    title = sys.argv[1] + '.py'
+
+    title = title.replace(' ','_')
+
+    
+
+    if exists(title):
+
+        print "\nA script with this name is already exists"
+
+        exit(1)
+
+    descrpt = " "
+
+    name = "pengyicheng"
+
+    ver = "1.0"
+
+
+
+div = '===================================='
+
+
+
+fp = open(title,'w')
+
+
+
+date = strftime("%Y%m%d")
+
+
+
+#write information to file
+
+fp.write('#!/usr/bin/env python')
+
+fp.write('\n# -*- coding: UTF-8 -*-')
+
+fp.write('\n#script name\t\t' + title)
+
+fp.write('\n#descrption\t\t\t' + descrpt)
+
+fp.write('\n#author\t\t\t\t' + name)
+
+fp.write('\n#date\t\t\t\t' + date)
+
+fp.write('\n#version\t\t\t' + ver)
+
+fp.write('\n#python_version\t\t2.6.6')
+
+fp.write('\n#' + div * 2 + '\n')
+
+fp.write('\n')
+
+fp.write('\n')
+
+
+
+fp.close()
+
+
+
+#os.system("clear")
+
+
+
+#call vim to edit
+
+os.system("vim " + title)
+
+exit(0)
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		sadd_head_for_python.py
+
+#descrption			add head string for python file
+
+#author				pengyicheng
+
+#date				20161116
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+#import argv from sys
+
+import sys
+
+import os
+
+from time import strftime
+
+
+
+DestPath = ''
+
+argv = sys.argv
+
+Extension = '.py'
+
+Head_str = '#!/usr/bin/env python'
+
+
+
+def usage():
+
+    print '- [Usage] : python sadd_head_for_python.py <filepath>'
+
+
+
+if len(argv) > 1:
+
+
+
+    FilePath = sys.argv[1]
+
+    if os.path.isdir(FilePath):
+
+        DestPath = FilePath
+
+    else:
+
+        usage()
+
+else:
+
+    DestPath = os.getcwd()
+
+
+
+print DestPath
+
+
+
+def check_extension(file):
+
+    if file.endswith(Extension):
+
+        return True
+
+    else:
+
+        return False
+
+
+
+dest_dir = '11_11_11'
+
+
+
+def add_head(file):
+
+    import shutil
+
+    global dest_dir
+
+    try:
+
+        fp = open(file,'r')
+
+    except:
+
+        return     
+
+    head_line = fp.readline()
+
+    if head_line.find(Head_str) >= 0:
+
+        #print 'ok'
+
+        pass
+
+    else:
+
+        ftmp = open('new'+file,'w')
+
+        fp.seek(0,0)
+
+        data = fp.read()
+
+        ftmp.write(Head_str + '\r\n' + data)
+
+        ftmp.close()
+
+        dest_path = os.getcwd() + os.path.sep + dest_dir
+
+        if not os.path.exists(dest_path):
+
+            dest_dir = strftime("%H_%M_%S")
+
+            os.mkdir(dest_dir)
+
+        
+
+        shutil.copy('new'+file,dest_dir)
+
+        os.remove('new' + file)
+
+        #print 'no'
+
+    fp.close()
+
+
+
+orignal_path = os.getcwd()
+
+os.chdir(DestPath)
+
+
+
+for file in os.listdir(os.getcwd()):
+
+    if check_extension(file):
+
+        add_head(file)
+
+        
+
+
+
+print 'operate success!'
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		salarm.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161108
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+import sys
+
+import string 
+
+#form time import sleep
+
+import time
+
+
+
+sa = sys.argv
+
+lsa = len(sys.argv)
+
+if lsa != 2:
+
+    print "error"
+
+    sys.exit(1)
+
+
+
+try:
+
+    minutes = int(sa[1])
+
+except ValueError:
+
+    print "error"
+
+    sys.exit(1)
+
+
+
+if minutes < 0:
+
+    print "error"
+
+    sys.exit(1)
+
+
+
+seconds = minutes * 60
+
+
+
+if minutes == 1:
+
+    unit_word = "minute"
+
+else:
+
+    unit_word = "minutes"
+
+
+
+try:
+
+    if minutes > 0:
+
+        print "sleeping for" + str(minutes) + unit_word
+
+        time.sleep(seconds)
+
+    print "wake up"
+
+    for i in range(5):
+
+       # print chr(7),
+
+        time.sleep(1)
+
+except KeyboardInterrupt:
+
+    print "interrupt"
+
+    sys.exit(1)
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*- 
+
+
+
+#File Name:scolor.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161102
+
+#Description:
+
+
+
+class bcolors:
+
+    HEADER = '\033[95m'     #pink 
+
+    OKBLUE = '\033[94m'     #blue
+
+    OKGREEN = '\033[92m'    #green
+
+    WARNING = '\033[93m'    #light yellow
+
+    FAIL = '\033[91m'       #red
+
+    ENDC = '\033[0m'        #white
+
+    BOLD = '\033[1m'        #bold
+
+    UNDERLINE = '\033[4m'   #underline
+
+def print_warning(str):
+
+    print bcolors.WARNING + str + bcolors.ENDC    
+
+
+
+def print_bold(str):
+
+    print bcolors.BOLD + str + bcolors.ENDC
+
+
+
+def print_header(str):
+
+    print bcolors.HEADER + str + bcolors.ENDC
+
+
+
+def print_fail(str):
+
+    print bcolors.FAIL + str + bcolors.ENDC
+
+
+
+def print_okblue(str):
+
+    print bcolors.OKBLUE + str + bcolors.ENDC
+
+
+
+if __name__ == '__main__':
+
+    print bcolors.HEADER + "waring character " + bcolors.ENDC
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		scount_lines.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161109
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+import sys
+
+import os 
+
+import codecs
+
+#from _pyio import open
+
+
+
+TotalCount = 0
+
+FileType = ['.c','.h']
+
+DescLineBegin = '//'
+
+DescBlockBegin = r'/**'
+
+DescBlockEnd = r'*/'
+
+FileEncode = 'utf-8'
+
+
+
+def main():
+
+    Dir = os.getcwd()
+
+    if len(sys.argv) >= 2:
+
+        Dir = sys.argv[1]
+
+    if os.path.exists(Dir) and os.path.isdir(Dir):
+
+        print ('target directory is %s'% Dir)
+
+        CountDir(Dir)
+
+        print ('total code line is %d ' % TotalCount)
+
+    else:
+
+        print ('target should be a directory !')
+
+
+
+#check filetype is setted FileType
+
+def isFileType(file):
+
+    for i in range(len(FileType)):
+
+        if file.find(FileType[i]) > 0:
+
+            return True
+
+    return False
+
+
+
+#find directory and subdirectory     
+
+def CountDir(Dir):
+
+    for file in os.listdir(Dir):
+
+        #get file path:dir is directory,os.path.sep is separator('/' in linux;'\' in windows)
+
+        absPath = Dir + os.path.sep + file
+
+        #print absPath
+
+        if os.path.exists(absPath):
+
+            if os.path.isdir(absPath):
+
+                CountDir(absPath)
+
+            elif isFileType(absPath):
+
+                try:
+
+                    CountFile(absPath)
+
+                except UnicodeDecodeError:
+
+                    print('encode is different')
+
+
+
+#count line in file
+
+def CountFile(file):
+
+    global TotalCount
+
+    local_count = 0
+
+    isInBlockNow = False
+
+    #f = codecs.open(file,'r',FileEncode)
+
+    f = open(file,'r')
+
+    for line in f:
+
+        #skip line beginning with '//'
+
+        if line.find(DescLineBegin) == 0:
+
+            continue
+
+        #find beginning of block code 
+
+        elif line.find(DescBlockBegin) >= 0:
+
+            isInBlockNow = True
+
+            local_count += 1
+
+            continue
+
+        #find endding of block code 
+
+        elif line.find(DescBlockEnd) >= 0:
+
+            isInBlockNow = False
+
+            local_count -= 1
+
+            continue
+
+        #count numbers add one when not in block code
+
+        elif isInBlockNow:
+
+            continue
+
+        else:
+
+            local_count += 1 
+
+    f.close()
+
+    TotalCount += local_count
+
+    print ('%s : %d' % (file,local_count))            
+
+
+
+if __name__ == '__main__':
+
+    main()
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*- 
+
+
+
+#File Name:screatCfile.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161115
+
+#Description:
+
+
+
+from time import strftime   #only load the strftime Module from Time 
+
+
+
+print "/******************************************************************************\r\n\tCopyright (C), Shenzhen  Xinguodu Technology Co., LTD.\r\n\t\t\thttp://www.xinguodu.com/en/\r\n******************************************************************************\r\n"
+
+print '   File Name     : postio.c'
+
+print '   Version       : 1.0'
+
+print '   Author        : pengyicheng'
+
+print '   Date          : ' + strftime("%Y-%m-%d") 
+
+print '   Description   : '
+
+print ' ******************************************************************************/'
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#title				sdaemon.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161102
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+def create_daemon():
+
+    import os, sys, time
+
+    try:
+
+        pid = os.fork()
+
+        if pid > 0:             #parent process get pid > 0;child process get pid = 0
+
+            sys.exit(0)         #parent process exit
+
+    except OSError,error:
+
+        print 'fork #1 failed:'
+
+        sys.exit(1)
+
+
+
+    os.chdir("/")               #decouple from parent environment
+
+    os.setsid()
+
+    os.umask(0)
+
+    
+
+    try:                        #do second fork
+
+        pid = os.fork()
+
+        if pid > 0 :
+
+            print "daemon PID %d" %pid
+
+            sys.exit(0)         #exit from second parent
+
+    except OSError,error:
+
+        print 'fork #2 failed'
+
+        sys.exit(1)
+
+    run()
+
+
+
+def ping():
+
+    import os
+
+    os.system('ping www.baidu.com > /dev/nul')
+
+
+
+def run():
+
+    while True:
+
+        import time, threading
+
+        fp = open('/home/ping.log','a')
+
+        fp.write('start time-------:%s\n'%time.ctime())
+
+        fp.flush()
+
+        t = threading.Thread(target = ping,args = ())
+
+        t.start()
+
+        time.sleep(3)
+
+        fp.write("end of time ------:%s\n"%time.ctime())
+
+        fp.flush()
+
+    fp.close()
+
+
+
+if __name__ == "__main__":
+
+    create_daemon()
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		sencryfile.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161110
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+import sys
+
+import crypt
+
+import base64
+
+
+
+#support file type
+
+FileType = ['.txt','.c']
+
+
+
+#show usage
+
+def usage():
+
+    print ('[-] Usage: ./sencryfile.py <filename>  support file type: .txt .c')
+
+    exit(0)
+
+
+
+#encrypt char
+
+def encry_char(char):
+
+    chadd = ord(char) + 2
+
+    chasc = chr(chadd)
+
+    return chasc
+
+
+
+#decryption 
+
+def decry_char(char):
+
+    chsub = ord(char) - 2
+
+    chasc = chr(chsub)
+
+    return chasc
+
+
+
+#encrypt string
+
+def encry_string(str,isEncry):
+
+    convert_str = []
+
+    for i in range(len(str)):
+
+        ch = str[i]
+
+        if isEncry:
+
+            chasc = encry_char(ch)
+
+        else:
+
+            chasc = decry_char(ch)
+
+        convert_str.append(chasc)
+
+    string_line = ''.join(convert_str)
+
+    return string_line
+
+
+
+#use base64 to encrypt
+
+def encry_string_base64(str,isEncry):
+
+    if isEncry:
+
+        string_line = base64.encodestring(str)
+
+    else:
+
+        string_line = base64.decodestring(str)
+
+    return string_line
+
+
+
+#encrypt file
+
+def encry(file):
+
+    f = open(file,'r')
+
+    fb = open('encry_'+file,'w')
+
+    for line in f:
+
+        #string_line = encry_string(line,True)
+
+        string_line = encry_string_base64(line,True)
+
+        fb.write(string_line)
+
+    f.close()
+
+    fb.close()
+
+
+
+#decrytion file
+
+def de_encry(file):
+
+    fc = open('decry_'+file,'w')
+
+    fb = open('encry_'+file,'r')
+
+    for line in fb:
+
+        #string_line = encry_string(line,False)
+
+        string_line = encry_string_base64(line,False)
+
+        fc.write(string_line)
+
+    fc.close()
+
+    fb.close()
+
+    print 'encrypt file success !'
+
+
+
+#check file type
+
+def isFileType(file):
+
+    for i in range(len(FileType)):
+
+        if file.find(FileType[i]) > 0:
+
+            return True
+
+    return False
+
+
+
+#check file is exist
+
+def isFileExist(file):
+
+    import os
+
+    dir = os.getcwd()
+
+    path = dir + os.path.sep + file
+
+    if os.path.exists(path):
+
+        return True
+
+    else:
+
+        return False
+
+
+
+def main():
+
+    if len(sys.argv) < 2:
+
+        usage()
+
+    file = sys.argv[1]
+
+    if not isFileType(file):
+
+        usage()
+
+    elif not isFileExist(file):
+
+        print 'file is not exist !'
+
+    else:
+
+        encry(file)
+
+        de_encry(file)
+
+
+
+if __name__ == '__main__':
+
+    main()
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*- 
+
+
+
+#File Name:sencrypt.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161102
+
+#Description:
+
+
+
+#encrypt the number
+
+from sys import stdout
+
+if __name__ == '__main':
+
+    num = int(raw_input('input a number:\n'))
+
+    mylist = []
+
+    mylist.append(num % 10)
+
+    mylist.append(num % 100 / 10)
+
+    mylist.append(num % 1000 / 100)
+
+    mylist.append(num / 1000)
+
+    mylist.reverse()
+
+    print mylist
+
+    for i in range(4):
+
+        mylist[i] += 5
+
+    print mylist
+
+     
+
+#input a string ,save to file
+
+if __name__ == '__main_':
+
+    filename = raw_input('input a file name:\n')
+
+    fp = open(filename,"w")
+
+    ch = raw_input('input string:\n')
+
+    while ch != '#':
+
+        fp.write(ch)
+
+        ch = raw_input('')
+
+    fp.close()
+
+
+
+#save file1 & file2 to file3
+
+if __name__ == '__main__':
+
+    import string
+
+    fp = open('haha')
+
+    a = fp.read()
+
+    fp.close()
+
+
+
+    fp = open('hah')
+
+    b = fp.read()
+
+    fp.close()
+
+
+
+    fp = open('test.txt',"w")
+
+    l = list (a + b)
+
+    s = ''
+
+    s = s.join(l)
+
+    fp.write(s)
+
+    fp.close()
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		sfile.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161110
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+import os
+
+
+
+def listFile(filepath):
+
+    try:
+
+        pathDir = os.listdir(filepath) 
+
+        for dir in pathDir:
+
+            print dir
+
+    except:
+
+        print 'input is not a path'
+
+
+
+def removeFile(file):
+
+    if os.path.exists(file):
+
+        os.remove(file)
+
+        print 'file removed !'
+
+    else:
+
+        print 'file is not exist'
+
+
+
+if __name__ == '__main__':
+
+    path = os.getcwd()  + os.path.sep + 'encry_log.txt'
+
+    listFile(path)
+
+    removeFile(path)
+
+
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python 
+
+
+
+#File Name:sfunction.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161101
+
+#Description:
+
+
+
+"""
+
+def intersect(seq1,seq2):
+
+    res = []
+
+    for x in seq1:
+
+        if x in seq2:
+
+            res.append(x)
+
+    return res
+
+
+
+s1 = "spanm"
+
+s2 = "jsilmn"
+
+print intersect(s1,s2)
+
+
+
+
+
+Tn = 0
+
+Sn = []
+
+n = 4
+
+a = 4
+
+slist = range(n)
+
+print slist
+
+for count in slist:
+
+    Tn = Tn + a
+
+    a = a * 10
+
+    Sn.append(Tn)
+
+    print Tn,
+
+    if count < slist[-1]:
+
+        print '+',
+
+print '=',
+
+#print ""
+
+Sn = reduce(lambda x,y:x + y,Sn)
+
+print Sn 
+
+"""
+
+def hello_world():
+
+    print 'hello world'
+
+
+
+def three_hellos():
+
+    for i in range(3):
+
+        hello_world()
+
+
+
+if __name__ == '__main__':
+
+    print "use internal"
+
+else:
+
+    print "import by others"
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		sgettotalpy.py
+
+#descrption			get python file in the current directory and merge all file
+
+#                   to one python file
+
+#author				pengyicheng
+
+#date				20161111
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+import os
+
+
+
+FileType = ['.py']
+
+DestFile = 'total.txt'
+
+
+
+#check file type
+
+def isFileType(file):
+
+    for i in range(len(FileType)):
+
+        if file.find(FileType[i]) + len(FileType[i]) == len(file):
+
+            if file.find(FileType[i]) > 0:
+
+                return True
+
+    return False
+
+
+
+#check files type
+
+def isFilesType(files):
+
+    file_filter = []
+
+    for file in files:
+
+        if isFileType(file):
+
+            file_filter.append(file)
+
+    return file_filter
+
+
+
+#merge file to '.txt' file
+
+def mergeFileToTxt(files):
+
+    absPath = os.getcwd() + os.path.sep + DestFile
+
+    if os.path.exists(absPath):
+
+        os.remove(absPath)
+
+        print 'clear old file'
+
+    fp = open(DestFile,'w')
+
+    for file in files:
+
+        f = open(file,'r')
+
+        fp.write('----'*8 + '\r\n')
+
+        for line in f:
+
+            fp.write(line + '\r\n')
+
+    fp.close()
+
+    print 'creat ' + DestFile + 'success'
+
+
+
+#get python file
+
+def getPythonFile():
+
+    path = os.getcwd()
+
+    files = os.listdir(path)
+
+    file_filter = isFilesType(files)
+
+    mergeFileToTxt(file_filter)
+
+        
+
+
+
+if __name__ == '__main__':
+
+    getPythonFile()
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		sget_html.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161116
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+
+
+import sys,time,os
+
+import mechanize
+
+
+
+LOGIN_URL = 'http://rdmtest.xgd.com:2000/'
+
+
+
+--------------------------------
+# $language = "Python"
+
+# $interface = "1.0"
+
+def main():
+
+	crt.Dialog.MessageBox("SecureCRT version is : "+crt.Version)
+
+main()
+--------------------------------
+#!/usr/bin/env python 
+
+
+
+#File Name:list.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161101
+
+#Description:
+
+
+
+a = [1,2,3]
+
+b = a[:]     #copy list a to b
+
+print b
+
+b[1] = 1
+
+print 'b is '
+
+print b
+
+print 'a is '
+
+print a
+
+del b[1]
+
+print 'after delete b[1]'
+
+print b
+
+print 'length of b :'
+
+print len(b)
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#title				slog.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161103
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+from lxml import etree
+
+#from lxml.etree
+
+import logging.handlers
+
+import logging
+
+import os
+
+import sys
+
+
+
+class logger:
+
+    
+
+    logpath = '/home/pyc/'
+
+    logsize = 3
+
+    lognum = 3
+
+    
+
+    logname = os.path.join(logpath,sys.argv[0].split('/')[-1].split('.')[0])
+
+    
+
+    #initial logger
+
+    log = logging.getLogger()
+
+    
+
+    #format logger
+
+    fmt = logging.Formatter('[%(asctime)s][%(filename)s][line:%(lineno)d][%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
+
+    
+
+    #output log to file
+
+    handle1 = logging.handlers.RotatingFileHandler(logname,maxBytes=logsize,backupCount=lognum)
+
+    handle1.setFormatter(fmt)
+
+    
+
+    #output log to screen
+
+    handle2 = logging.StreamHandler(stream=sys.stdout)
+
+    handle2.setFormatter(fmt)
+
+    
+
+    log.addHandler(handle1)
+
+    log.addHandler(handle2)
+
+    
+
+    log.setLevel(logging.INFO)
+
+    
+
+    @classmethod
+
+    def info(cls,msg):
+
+        cls.log.info(msg)
+
+        return
+
+
+
+    @classmethod
+
+    def warning(cls,msg):
+
+        cls.log.warning(msg)
+
+        return 
+
+
+
+    @classmethod
+
+    def error(cls,msg):
+
+        cls.log.error(msg)
+
+        return 
+
+    
+
+--------------------------------
+#!/usr/bin/env python
+
+#print "hello \n world"
+
+import string
+
+import hello
+
+#path = 'c:\share\test\new'
+
+#print path
+
+path1 = r'c:\share\test\new'  #close transferred meaning 
+
+print path1
+
+
+
+"""
+
+s = raw_input('input a string:\n')
+
+letters = 0
+
+space = 0
+
+numbers = 0
+
+others = 0
+
+for c in s:
+
+    if c.isalpha():
+
+        letters += 1
+
+    elif c.isspace():
+
+        space += 1
+
+    elif c.isdigit():
+
+        numbers += 1
+
+    else:
+
+        others += 1
+
+print 'char = %d,space = %d,number = %d,other = %d'\
+
+         % (letters,space,numbers,others)
+
+"""
+
+L = [1,2,3,4,5]
+
+s1 = ','.join(str(n) for n in L)
+
+print s1
+
+L2 = ['1','2','3','4','5']
+
+s2 = ','.join(L2)
+
+print s2
+
+--------------------------------
+#!/usr/bin/env python 
+
+
+
+#File Name:time.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161101
+
+#Description:
+
+
+
+import time
+
+import datetime
+
+
+
+d = {1:'a',2:'b'}
+
+for key,value in dict.items(d):
+
+    print key,value
+
+    time.sleep(1)     #stop one second 
+
+
+
+print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+
+
+
+time.sleep(1)
+
+
+
+print (datetime.date.today().strftime('%d/%m/%Y'))
+
+myBirthDay = datetime.date(1941,1,4)
+
+print (myBirthDay.strftime('%d/%m/%Y'))
+
+
+
+myBirthNextDay = myBirthDay + \
+
+    datetime.timedelta(days=1)
+
+print (myBirthNextDay.strftime('%d/%m/%Y'))
+
+
+
+myFirstBirthDay = myBirthDay.replace(year=myBirthDay.year -1)
+
+print (myFirstBirthDay.strftime('%d/%m/%Y'))
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		sudisk_download.py
+
+#descrption			 
+
+#author				pengyicheng
+
+#date				20161109
+
+#version			1.0
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+
+
+print'                                                              ' 
+
+print'                   UDISK DOWNLOAD PYTHON 1.0                  '
+
+print'       ===============================================        '
+
+print'                          MACHINE MODEL                       '
+
+print'                                                              '
+
+print'            1.G810                     2.G3                   '
+
+print'            3.G870                                            '
+
+print'                                                              '
+
+print'            e.EXIT                                            '
+
+print'                                                              '
+
+print'       ===============================================        '
+
+
+
+def InputModel():
+
+    while(True):
+
+        choice = raw_input("PLEASE SELECT MACHINE MODEL: ")
+
+        if not choice.isdigit():
+
+            if choice.upper() == 'E':
+
+                print 'THANKS FOR USE! BYE BYE ~'
+
+                exit(0)
+
+            else:
+
+                print 'PLEASE CHOOSE RIGHT NUMBER'
+
+        else:
+
+            return choice
+
+class pos_model:
+
+    MACHINE_MODEL = 'G3'
+
+    SELECT_NUM    = '1'
+
+    SUBDIR        = '47'
+
+    MODEL_TABLE = { '1':['G810','42'],'2':['G3','31'],
+
+                    '3':['G870','4B']}
+
+    def __init__(self,model_number):
+
+        self.SELECT_NUM = str(model_number)
+
+    def getSubDir(self):
+
+        self.SUBDIR = self.MODEL_TABLE[self.SELECT_NUM ][1]
+
+        print 'subdir is :' + self.SUBDIR    
+
+    def getMachineModel(self):
+
+        self.MACHINE_MODEL = self.MODEL_TABLE[self.SELECT_NUM][0]
+
+        print 'model is :' + self.MACHINE_MODEL
+
+
+
+    def getFileNum(self):
+
+        import os
+
+        file_num = 0
+
+        for i in ['mtd0','mtd0_dll','mtd0_res']:
+
+            filepath = os.getcwd() + os.path.sep + i
+
+            try:
+
+                file = os.listdir(filepath)
+
+                file_num += len(file)
+
+            except:
+
+                print filepath + 'is not exist'
+
+        return file_num
+
+
+
+    def getConfigFile(self,fp):
+
+        import os
+
+        file_num = 0
+
+        for i in ['mtd0','mtd0_dll','mtd0_res']:
+
+            filepath = os.getcwd() + os.path.sep + i
+
+            file = i.split('_')
+
+            
+
+            destpath = '/' + '/'.join(file) + '/'
+
+            #print 'dest = ' + destpath
+
+            try:
+
+                file = os.listdir(filepath)
+
+                #print file
+
+                for dir in file:
+
+                    #print dir
+
+                    recent = ['recent',str(file_num),'=1;',dir,destpath,dir]
+
+                    #print recent
+
+                    recent_string = ''.join(recent)
+
+                   # recent_string = 'recent' + file_num + ';' + dir + ';' + filepath + dir 
+
+                    print recent_string
+
+                    fp.write(recent_string + '\r\n')
+
+                    file_num += 1
+
+            except:
+
+                pass#print  'file in ' + filepath + ' is none'
+
+    def mergeFile(self):
+
+        import os 
+
+        import shutil
+
+        path = os.getcwd() + os.path.sep + self.MACHINE_MODEL# + os.path.sep + self.SUBDIR
+
+       # if os.path.isdir(path):
+
+       #     shutil.rmtree(self.SUBDIR)
+
+        if os.path.isdir(path):
+
+           # os.mkdir(self.MACHINE_MODEL)
+
+            shutil.rmtree(path)
+
+        os.mkdir(path)
+
+
+
+        destpath = os.getcwd() + os.path.sep + self.MACHINE_MODEL + os.path.sep +  self.SUBDIR
+
+        if os.path.isdir(destpath):
+
+            shutil.rmtree(destpath)
+
+       # os.mkdir(self.SUBDIR)
+
+        os.mkdir(destpath)
+
+        shutil.copy('config.ini',destpath)
+
+        for i in ['mtd0','mtd0_dll','mtd0_res']:
+
+            filepath = os.getcwd() + os.path.sep + i
+
+           # destpath = os.getcwd() +os.path.sep + self.MACHINE_MODEL + os.path.sep + self.SUBDIR
+
+           #try:
+
+            file = os.listdir(filepath)
+
+            print file
+
+               # shutil.copytree(i,self.SUBDIR)
+
+            for dir in file:
+
+                subfile = filepath + os.path.sep + dir
+
+                shutil.copy(subfile,destpath)
+
+
+
+    def run(self):
+
+        self.getSubDir()
+
+        self.getMachineModel()
+
+        file_num = self.getFileNum()
+
+        print file_num
+
+        fp = open('config.ini','w')
+
+        fp.write('[History]' + "\r\n")
+
+        fp.write('RecentCount=' + str(file_num) + "\r\n")
+
+        self.getConfigFile(fp)
+
+        fp.close()    
+
+        self.mergeFile()   
+
+
+
+def main():
+
+    choice = InputModel()
+
+    choice_model = pos_model(choice)
+
+    choice_model.run()    
+
+
+
+if __name__ == '__main__':
+
+    main()
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python
+
+# -*- coding: UTF-8 -*-
+
+#script name		sudisk_download.py
+
+#descrption			modify the module of directory,tidy up some comments and syntax  
+
+#author				pengyicheng
+
+#date				20161115
+
+#version			1.1
+
+#python_version		2.6.6
+
+#========================================================================
+
+
+
+import os
+
+
+
+print'                                                              ' 
+
+print'                   UDISK DOWNLOAD PYTHON 1.0                  '
+
+print'       ===============================================        '
+
+print'                          MACHINE MODEL                       '
+
+print'                                                              '
+
+print'            1.G810                     2.G3                   '
+
+print'            3.G870                                            '
+
+print'                                                              '
+
+print'            e.EXIT                                            '
+
+print'                                                              '
+
+print'       ===============================================        '
+
+
+
+def InputModel():
+
+    while(True):
+
+        choice = raw_input("PLEASE SELECT MACHINE MODEL: ")
+
+        if not choice.isdigit():
+
+            if choice.upper() == 'E':
+
+                print 'THANKS FOR USE! BYE BYE ~'
+
+                exit(0)
+
+            else:
+
+                print 'PLEASE CHOOSE RIGHT NUMBER'
+
+        else:
+
+            return choice
+
+
+
+class pos_model:
+
+    MACHINE_MODEL = 'G3'
+
+    SELECT_NUM    = '1'
+
+    SUBDIR        = '47'
+
+    MODEL_TABLE = { '1':['G810','42'],'2':['G3','31'],
+
+                    '3':['G870','4B']}
+
+
+
+    def __init__(self,model_number):
+
+        self.SELECT_NUM = str(model_number)
+
+    def getSubDir(self):
+
+        self.SUBDIR = self.MODEL_TABLE[self.SELECT_NUM ][1]
+
+        print 'subdir is :' + self.SUBDIR    
+
+    def getMachineModel(self):
+
+        self.MACHINE_MODEL = self.MODEL_TABLE[self.SELECT_NUM][0]
+
+        print 'model is :' + self.MACHINE_MODEL
+
+
+
+    def getFileNum(self):
+
+        file_num = 0
+
+        for i in ['mtd0','mtd0_dll','mtd0_res']:
+
+            filepath = os.getcwd() + os.path.sep + i
+
+            try:
+
+                file = os.listdir(filepath)
+
+                file_num += len(file)
+
+            except:
+
+                print filepath + 'is not exist'
+
+        return file_num
+
+
+
+    def getConfigFile(self,fp):
+
+        file_num = 0
+
+        for i in ['mtd0','mtd0_dll','mtd0_res']:
+
+            filepath = os.getcwd() + os.path.sep + i
+
+            file = i.split('_')
+
+            
+
+            destpath = '/' + '/'.join(file) + '/'     #add '/' ;ex:'hello.c' convert to '/hello/c/'
+
+            #destpath = os.path.sep + os.path.sep.join(file) + os.path.sep  #I think it's good through this function to get path;no,only '/' in linux
+
+            try:
+
+                file = os.listdir(filepath)
+
+                for dir in file:
+
+                    recent = ['recent',str(file_num),'=1;',dir,destpath,dir]  #format : recent[x]=1;file_name+destination path + file_name
+
+                    recent_string = ''.join(recent)    #convert list to string
+
+                   # print recent_string
+
+                    fp.write(recent_string + '\r\n')   #write string to file
+
+                    file_num += 1
+
+            except:
+
+                pass
+
+
+
+    def mergeFile(self):
+
+        import os 
+
+        import shutil
+
+        path = os.getcwd() + os.path.sep + self.MACHINE_MODEL       
+
+        if os.path.isdir(path):     #if directory is exist ,delete it,and create a new directory
+
+            shutil.rmtree(path)
+
+        os.mkdir(path)
+
+        #destination path : machine_model + machine_code 
+
+        destpath = os.getcwd() + os.path.sep + self.MACHINE_MODEL + os.path.sep +  self.SUBDIR
+
+        if os.path.isdir(destpath): #if directory is exist ,delete it,and create a new directory
+
+            shutil.rmtree(destpath)
+
+        os.mkdir(destpath)
+
+        try:
+
+            shutil.copy('config.ini',destpath)
+
+        except:
+
+            print 'remove config.ini error'
+
+
+
+        abspath = os.getcwd()
+
+        for i in ['mtd0','mtd0_dll','mtd0_res']:
+
+            filepath = abspath + os.path.sep + i
+
+           # print filepath + '   is current path' 
+
+            file = os.listdir(filepath)
+
+           # print file
+
+               
+
+          #  for dir in file:
+
+          #      subfile = filepath + os.path.sep + dir
+
+          #      shutil.copy(subfile,destpath)
+
+            os.chdir(filepath)      #change current directory to subfile path
+
+            for dir in file:
+
+                shutil.copy(dir,destpath)
+
+        os.chdir(abspath)
+
+
+
+    def run(self):
+
+        self.getSubDir()
+
+        self.getMachineModel()
+
+        file_num = self.getFileNum()
+
+        print 'total file is :' + str(file_num)
+
+        try:
+
+            os.remove('config.ini')
+
+        except:
+
+            pass
+
+        fp = open('config.ini','w')
+
+        fp.write('[History]' + "\r\n")
+
+        fp.write('RecentCount=' + str(file_num) + "\r\n")
+
+        self.getConfigFile(fp)
+
+        fp.close()    
+
+        self.mergeFile()   
+
+        print 'operate success !'
+
+
+
+def main():
+
+    choice = InputModel()
+
+    choice_model = pos_model(choice)
+
+    choice_model.run()    
+
+
+
+if __name__ == '__main__':
+
+    main()
+
+
+
+
+
+
+
+--------------------------------
+#!/usr/bin/env python 
+
+
+
+#File Name:test.py
+
+#Author:pengyicheng
+
+#Version:1.0
+
+#Create Time:20161101
+
+#Description:
+
+
+
+import sys
+
+
+
+while False:
+
+    reply = raw_input("Enter text ")
+
+    if reply == 'stop':
+
+        break
+
+    #check input number
+
+    elif not reply.isdigit():
+
+        print 'error input'
+
+    else:
+
+        print int(reply)**2
+
+#print 'bye'* 8
+
+
+
+while False:
+
+    reply = raw_input("Enter text : ")
+
+    if reply == 'stop':
+
+        break
+
+    try:
+
+        num = int(reply)
+
+    except:
+
+        print 'error input'    
+
+    else:
+
+        print num ** 2
+
+#print 'bye' * 8
+
+
+
+
+
+
+
+
+

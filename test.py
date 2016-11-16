@@ -31,18 +31,6 @@ while False:
         print num ** 2
 #print 'bye' * 8
 
-class FileFaker:
-    def write(self,string):
-        string = 'abcdef'        
-#sys.stdout = FileFaker()
-#print "hello"
-
-#sys.stdout = open('log.txt','a')
-log = open('log.txt','a')
-print >> log,'adjk'
-log.close()
-
-
 
 
 
